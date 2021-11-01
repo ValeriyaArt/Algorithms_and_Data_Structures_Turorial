@@ -27,18 +27,23 @@ input_file_worst.close()
 
 # основная функция
 
-def selection_sort(n, array):
-    sorted_list = []
+def bubble_sort(n, array):
+    """
+    Функция пузырьковой сортировки массива
+    :param n: размер массива
+    :param array: массив
+    :return: отсортированный массив
+    """
     for i in range(n):
-        min_element = min(array)
-        sorted_list.append(min_element)
-        array.remove(min_element)
-    return sorted_list
+        for j in range(n-(i+1)):
+            if array[j] > array[j+1]:
+                array[j+1], array[j] = array[j], array[j+1]
+    return array
 
 
 # вызов функции
 
-sorted_normal = selection_sort(n_normal, normal_list)
+sorted_normal = bubble_sort(n_normal, normal_list)
 # запись результата в файл
 output_file_normal = open('output_normal.txt', 'w')
 output_file_normal.write(' '.join(list(map(str, sorted_normal))))
@@ -48,7 +53,7 @@ print("Время работы алгоритма ", (time.perf_counter() - t_st
 print("Текущий объем затрачиваемой памяти на работу алгоритма при нормальных входных данных ", tracemalloc.get_traced_memory()[0]/2**20, "MB")
 print("Пиковый объем затрачиваемой памяти на работу алгоритма при нормальных входных данных ", tracemalloc.get_traced_memory()[1]/2**20, "MB")
 
-sorted_best = selection_sort(n_best, best_list)
+sorted_best = bubble_sort(n_best, best_list)
 
 output_file_best = open('output_best.txt', 'w')
 output_file_best.write(' '.join(list(map(str, sorted_best))))
@@ -58,7 +63,7 @@ print("Время работы алгоритма ", (time.perf_counter() - t_st
 print("Текущий объем затрачиваемой памяти на работу алгоритма при лучших входных данных", tracemalloc.get_traced_memory()[0]/2**20, "MB")
 print("Пиковый объем затрачиваемой памяти на работу алгоритма при лучших входных данных", tracemalloc.get_traced_memory()[1]/2**20, "MB")
 
-sorted_worst = selection_sort(n_worst, worst_list)
+sorted_worst = bubble_sort(n_worst, worst_list)
 
 output_file_worst = open('output_worst.txt', 'w')
 output_file_worst.write(' '.join(list(map(str, sorted_worst))))
